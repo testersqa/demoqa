@@ -24,6 +24,12 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Run tests
+    - name: Run tests and generate XML report
       run: |
-        pytest -v
+        pytest --junitxml=results.xml -v
+
+    - name: Upload test results as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: results.xml
